@@ -7,6 +7,12 @@
  * calls
  * 
  * as a FIFO
+ * ******************************************* *
+ * Licence : GNU v3
+ * Licence URL : https://github.com/Splashframe/jQuery-Stack/blob/master/LICENSE.md
+ * GitHub URL : https://github.com/Splashframe/jQuery-Stack/
+ * Author : Splash Frame
+ * Author URL : https://splashframe.tk
  * ******************************************* */
 (function( global, factory ) {
 
