@@ -46,9 +46,9 @@
 		}
 		return new Stack.fn.init();
 	};
-	var version = '1.0.1';
+	var version = '1.0.14';
 	Stack.fn = Stack.prototype = {
-		v:'1.0.1',
+		v:'1.0.14',
 		constructor:Stack,
 		debug:false,
 		timer:50,
@@ -75,7 +75,9 @@
 			Stack.fn.start();
 		},
 		stop:function(){
-			console.log(Stack.fn.queure);
+			if(Stack.fn.getDebug()==true){
+				console.log(Stack.fn.queure);	
+			}
 			if((typeof Stack.fn.queure)!='undefined')
 			{
 				if(Stack.fn.running==true){
@@ -89,9 +91,6 @@
 				if(Stack.fn.getDebug()==true){
 					console.log('Debug Active');
 				}
-				else{
-					console.log('Debug inactive');
-				}
 				if(Stack.fn.getDebug()==true)
 				{
 					if((typeof Stack.fn.cdtimer)=='undefined'){
@@ -101,19 +100,15 @@
 						Stack.fn.setTimer(Stack.fn.cdtimer);
 					}
 				}
-				console.log('Request Timer:'+Stack.fn.getTimer());
+				if(Stack.fn.getDebug()==true){
+					console.log('Request Timer:'+Stack.fn.getTimer());
+				}
 				Stack.fn.queure=setInterval(function(){
 					if(Stack.fn.running==false){
 						Stack.fn.running=true;
 					}
 					if(Stack.fn.getDebug()==true)
 						console.log(Stack.fn);
-					if(Stack.fn.stack.length!=0)
-					{
-						var obj=Stack.fn.stack.shift();
-						if(Stack.fn.getDebug()==true)
-							console.log(obj);
-					}
 					if(Stack.fn.getDebug()==true)
 					{
 						console.log('Ajax Status:');
@@ -126,6 +121,12 @@
 			    	if(Stack.fn.ajaxCheck()!=true){
 			    		if(Stack.fn.getMStatus()==false){
 					    	try{
+								if(Stack.fn.stack.length!=0)
+								{
+									var obj=Stack.fn.stack.shift();
+									if(Stack.fn.getDebug()==true)
+										console.log(obj);
+								}
 					    		if(Stack.fn.getDebug()==true){
 					    			console.log('checking for data to execute...');
 					    		}
@@ -250,7 +251,9 @@
 		}
 	};
 	init = Stack.fn.init = function(){
-		Stack.fn.start();
+		$(document).ready(function(){
+			Stack.fn.start();	
+		});
 		return Stack.fn;
 	};
 	
